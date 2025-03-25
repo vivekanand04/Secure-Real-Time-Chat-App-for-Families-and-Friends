@@ -65,24 +65,32 @@ const Auth = () => {
 
   const handleSignup = async () => {
     try {
+      // Check if the signup form inputs are valid before making a request
       if (validateSignup()) {
+        // Send a POST request to the signup route with email and password
         const response = await apiClient.post(
-          SIGNUP_ROUTE,
+          SIGNUP_ROUTE, // API endpoint for signup
           {
-            email,
-            password,
+            email, // User's email input
+            password, // User's password input
           },
-          { withCredentials: true }
+          { withCredentials: true } // Include cookies for authentication purposes
         );
+
+        // Check if the signup request was successful (HTTP status 201: Created)
         if (response.status === 201) {
+          // Store the returned user data in state
           setUserInfo(response.data.user);
+          // Navigate to the profile page after successful signup
           navigate("/profile");
         }
       }
     } catch (error) {
+      // Log any errors that occur during the signup process
       console.log(error);
     }
   };
+
 
   return (
     <div className="h-[100vh] w-[100vw] flex items-center justify-center">
@@ -99,12 +107,16 @@ const Auth = () => {
           </div>
           <div className="flex items-center justify-center w-full ">
             <Tabs defaultValue="login" className="w-3/4">
+              {" "}
+              {/* </Tabs>:Acts as a container for all tab-related components. */}
               <TabsList className="bg-transparent rounded-none w-full ">
+                {" "}
+                {/* </TabsList>:Functions like a navigation bar for switching between tabs. */}
                 <TabsTrigger
                   className="data-[state=active]:bg-transparent text-black text-opacity-90 border-b-2    rounded-none w-full data-[state=active]:text-black  data-[state=active]:font-semibold data-[state=active]:border-b-purple-500 p-3 transition-all duration-300"
                   value="login"
                 >
-                  Login
+                  {/* TabsTrigger: The clickable button that switches tabs. Login */}{" "}
                 </TabsTrigger>
                 <TabsTrigger
                   className="data-[state=active]:bg-transparent text-black text-opacity-90 border-b-2   rounded-none w-full data-[state=active]:text-black  data-[state=active]:font-semibold data-[state=active]:border-b-purple-500 p-3 transition-all duration-300 "
@@ -114,6 +126,8 @@ const Auth = () => {
                 </TabsTrigger>
               </TabsList>
               <TabsContent value="login" className="flex flex-col gap-5 mt-10">
+                {" "}
+                {/* <TabsContent>:Holds the content for a specific tab. */}
                 <Input
                   placeholder="Email"
                   type="email"

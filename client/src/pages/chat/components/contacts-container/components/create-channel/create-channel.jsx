@@ -55,7 +55,7 @@ const CreateChannel = () => {
       addChannel(response.data.channel);
       socket.emit("add-channel-notify", response.data.channel);
     }
-  };
+   };
 
   return (
     <>

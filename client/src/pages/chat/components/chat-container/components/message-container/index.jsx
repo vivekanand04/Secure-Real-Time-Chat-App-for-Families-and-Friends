@@ -29,33 +29,44 @@ const MessageContainer = () => {
   const messageEndRef = useRef(null);
 
   useEffect(() => {
+    // Function to fetch messages for one-on-one chats
     const getMessages = async () => {
       const response = await apiClient.post(
-        FETCH_ALL_MESSAGES_ROUTE,
+        // Sends a POST request to fetch messages
+        FETCH_ALL_MESSAGES_ROUTE, // API endpoint for fetching messages
         {
-          id: selectedChatData._id,
+          id: selectedChatData._id, // Sends the selected chat's ID in the request body
         },
-        { withCredentials: true }
+        { withCredentials: true } // Ensures credentials (cookies, tokens) are sent with the request
       );
 
       if (response.data.messages) {
-        setSelectedChatMessages(response.data.messages);
+        // Checks if messages exist in the response
+        setSelectedChatMessages(response.data.messages); // Updates state with fetched messages
       }
     };
+
+    // Function to fetch messages for a channel chat
     const getChannelMessages = async () => {
       const response = await apiClient.get(
-        `${GET_CHANNEL_MESSAGES}/${selectedChatData._id}`,
-        { withCredentials: true }
+        // Sends a GET request to fetch channel messages
+        `${GET_CHANNEL_MESSAGES}/${selectedChatData._id}`, // API endpoint with chat ID
+        { withCredentials: true } // Ensures credentials are sent
       );
+
       if (response.data.messages) {
-        setSelectedChatMessages(response.data.messages);
+        // Checks if messages exist in the response
+        setSelectedChatMessages(response.data.messages); // Updates state with fetched messages
       }
     };
+
+    // Ensures fetching only if a chat is selected
     if (selectedChatData._id) {
-      if (selectedChatType === "contact") getMessages();
-      else if (selectedChatType === "channel") getChannelMessages();
+      if (selectedChatType === "contact")
+        getMessages(); // Fetches messages for one-on-one chats
+      else if (selectedChatType === "channel") getChannelMessages(); // Fetches messages for a channel
     }
-  }, [selectedChatData, selectedChatType, setSelectedChatMessages]);
+  }, [selectedChatData, selectedChatType, setSelectedChatMessages]); // Dependencies: Runs when these values change
 
   useEffect(() => {
     if (messageEndRef.current) {
@@ -64,11 +75,18 @@ const MessageContainer = () => {
   }, [selectedChatMessages]);
 
   const checkIfImage = (filePath) => {
+    // Define a regular expression to match common image file extensions
     const imageRegex =
       /\.(jpg|jpeg|png|gif|bmp|tiff|tif|webp|svg|ico|heic|heif)$/i;
+
+    // Test if the given filePath matches any of the image extensions
     return imageRegex.test(filePath);
+    // Example usage
+    console.log(checkIfImage("photo.jpg")); // true (valid image file)
+    console.log(checkIfImage("document.pdf")); // false (not an image)
   };
 
+  
   const downloadFile = async (url) => {
     setIsDownloading(true);
     setDownloadProgress(0);
@@ -91,22 +109,35 @@ const MessageContainer = () => {
     setIsDownloading(false);
     setDownloadProgress(0);
   };
-
+  // Function to render messages in the chat window
   const renderMessages = () => {
-    let lastDate = null;
+    let lastDate = null; // Variable to store the last processed message's date
+
+    // Loop through all selected chat messages and render them
     return selectedChatMessages.map((message, index) => {
+      // Extract and format the date of the current message (YYYY-MM-DD format)
       const messageDate = moment(message.timestamp).format("YYYY-MM-DD");
+
+      // Check if the date is different from the last message's date
       const showDate = messageDate !== lastDate;
+
+      // Update lastDate to the current message's date for the next iteration
       lastDate = messageDate;
 
       return (
         <div key={index} className="">
+          {/* If the date has changed, display the date as a separator */}
           {showDate && (
             <div className="text-center text-gray-500 my-2">
+              {/* Display the formatted date (e.g., "February 18, 2025") */}
               {moment(message.timestamp).format("LL")}
             </div>
           )}
+
+          {/* If the selected chat type is 'contact' (one-on-one chat), render personal messages */}
           {selectedChatType === "contact" && renderPersonalMessages(message)}
+
+          {/* If the selected chat type is 'channel' (group chat), render channel messages */}
           {selectedChatType === "channel" && renderChannelMessages(message)}
         </div>
       );

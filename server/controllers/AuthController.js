@@ -1,43 +1,53 @@
-import jwt from "jsonwebtoken";
-import User from "../model/UserModel.js";
-import { compare } from "bcrypt";
-import { renameSync, unlinkSync } from "fs";
+import jwt from "jsonwebtoken"; // Importing JSON Web Token (JWT) for authentication
+import User from "../model/UserModel.js"; // Importing the User model from the database schema
+import { compare } from "bcrypt"; // Importing bcrypt for password hashing and comparison
+import { renameSync, unlinkSync } from "fs"; // Importing file system functions for file manipulation (not used in this function)
 
+// Setting the maximum age for the JWT token (3 days)
 const maxAge = 3 * 24 * 60 * 60 * 1000;
+
 
 const createToken = (email, userId) => {
   return jwt.sign({ email, userId }, process.env.JWT_KEY, {
-    expiresIn: maxAge,
+    expiresIn: maxAge, // Token expires in 3 days
   });
 };
 
+
 export const signup = async (req, res, next) => {
   try {
-    const { email, password } = req.body;
+    const { email, password } = req.body; // Extract email and password from request body
+
     if (email && password) {
+      // Check if both email and password are provided
+      // Create a new user in the database (password is hashed in UserModel before saving)
       const user = await User.create({ email, password });
+
+      // Create and set a JWT token in the user's browser cookies
       res.cookie("jwt", createToken(email, user.id), {
-        maxAge,
-        secure: true,
-        sameSite: "None",
+        maxAge, // Cookie expiration time (3 days)
+        secure: true, // Ensures cookie is sent only over HTTPS
+        sameSite: "None", // Allows cross-site requests with credentials
       });
 
+      // Return the user details in response (excluding password for security)
       return res.status(201).json({
         user: {
           id: user?.id,
           email: user?.email,
-          firstName: user.firstName,
-          lastName: user.lastName,
-          image: user.image,
-          profileSetup: user.profileSetup,
+          firstName: user.firstName, // First name of the user (if provided)
+          lastName: user.lastName, // Last name of the user (if provided)
+          image: user.image, // Profile image of the user (if provided)
+          profileSetup: user.profileSetup, // Boolean flag indicating profile completion
         },
       });
     } else {
+      // If email or password is missing, return a 400 (Bad Request) error
       return res.status(400).send("Email and Password Required");
     }
   } catch (err) {
-    console.log(err);
-    return res.status(500).send("Internal Server Error");
+    console.log(err); // Log any server errors
+    return res.status(500).send("Internal Server Error"); // Return a 500 (Internal Server Error) response
   }
 };
 
@@ -113,7 +123,7 @@ export const logout = async (request, response, next) => {
 
 export const updateProfile = async (request, response, next) => {
   try {
-    const { userId } = request;
+    const { userId } = request; 
 
     const { firstName, lastName, color } = request.body;
 

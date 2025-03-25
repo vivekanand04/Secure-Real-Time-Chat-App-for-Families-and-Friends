@@ -4,20 +4,23 @@ import Message from "../model/MessagesModel.js";
 
 export const getAllContacts = async (request, response, next) => {
   try {
+    // Fetch all users except the one making the request
     const users = await User.find(
-      { _id: { $ne: request.userId } },
-      "firstName lastName _id"
+      { _id: { $ne: request.userId } }, // Exclude the requesting user
+      "firstName lastName _id" // Select only firstName, lastName, and _id fields
     );
 
+    // Format the users into a contacts array with label and value properties
     const contacts = users.map((user) => ({
-      label: `${user.firstName} ${user.lastName}`,
-      value: user._id,
+      label: `${user.firstName} ${user.lastName}`, // Full name as label
+      value: user._id, // User ID as value
     }));
 
+    // Send the formatted contacts as a JSON response with status 200
     return response.status(200).json({ contacts });
   } catch (error) {
-    console.log({ error });
-    return response.status(500).send("Internal Server Error.");
+    console.log({ error }); // Log any errors that occur
+    return response.status(500).send("Internal Server Error."); // Send a 500 error response
   }
 };
 
