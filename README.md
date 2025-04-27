@@ -2,7 +2,7 @@
 
 A modern real-time chat application built with the **MERN stack** and **Socket.io**, offering a seamless experience for both **one-on-one** and **group messaging** with rich file-sharing features, emoji support, and file download capability.
 
-> 🌐 **Live Demo**: [BaatChit on Vercel](https://your-vercel-link.vercel.app)
+> 🌐 **Live Demo**: https://youtu.be/NLLexZ5vN5Y?si=6_BJY5R91EUzW_I3
 
 ---
 
