@@ -1,6 +1,6 @@
-# 💬 BaatChit - Realtime Group Chat Platform
+# 💬 SecureChat - Real-Time Family & Friends Messaging
 
-A modern real-time chat application built with the **MERN stack** and **Socket.io**, offering a seamless experience for both **one-on-one** and **group messaging** with rich file-sharing features, emoji support, and file download capability.
+A secure real-time chat platform built with the **MERN stack** and **Socket.io**, designed for **families and close friends**. It supports **one-on-one** and **group messaging**, with **end-to-end encryption**, **multi-file sharing**, and an **extended message deletion window** of up to **280 days** — a rare feature not offered by most mainstream apps.
 
 > 🌐 **Live Demo**: https://youtu.be/NLLexZ5vN5Y?si=6_BJY5R91EUzW_I3
 
