@@ -1,4 +1,4 @@
-# 💬 SecureChat - Real-Time Family & Friends Messaging
+# 💬 Secure Real-Time Family & Friends Messaging
 
 A secure real-time chat platform built with the **MERN stack** and **Socket.io**, designed for **families and close friends**. It supports **one-on-one** and **group messaging**, with **end-to-end encryption**, **multi-file sharing**, and an **extended message deletion window** of up to **280 days** — a rare feature not offered by most mainstream apps.
 
