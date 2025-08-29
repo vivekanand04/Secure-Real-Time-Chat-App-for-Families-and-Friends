@@ -24,7 +24,7 @@ const app = express(); // Creating an Express application instance.
 
 const port = process.env.PORT||3000; // Retrieving the port number from environment variables.
 
-const databaseURL = process.env.DATABSE_URL; // Retrieving the database connection URL from environment variables.
+const databaseURL = process.env.DATABASE_URL; // Retrieving the database connection URL from environment variables.
 
 app.use(
   cors({
@@ -84,7 +84,7 @@ mongoose
 
 // const app = express();
 // const port = process.env.PORT;
-// const databaseURL = process.env.DATABSE_URL;
+// const databaseURL = process.env.DATABASE_URL;
 
 // app.use(
 //   cors({
