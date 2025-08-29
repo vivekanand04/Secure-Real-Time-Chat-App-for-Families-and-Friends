@@ -10,8 +10,10 @@ export const AUTH_ROUTES = "api/auth";
 
 
 // Define specific authentication routes by appending to the base AUTH_ROUTES
-export const LOGIN_ROUTE = `${AUTH_ROUTES}/login`; // API route for user login
-export const SIGNUP_ROUTE = `${AUTH_ROUTES}/signup`; // API route for user signup
+
+// export const LOGIN_ROUTE = `${AUTH_ROUTES}/login`; // API route for user login
+export const LOGIN_ROUTE = `${HOST}/${AUTH_ROUTES}/login`;
+export const SIGNUP_ROUTE = `${HOST}/${AUTH_ROUTES}/signup`; // API route for user signup
 export const GET_USERINFO_ROUTE = `${AUTH_ROUTES}/userinfo`; // API route to fetch user info
 export const LOGOUT_ROUTE = `${AUTH_ROUTES}/logout`; // API route for logging out
 export const UPDATE_PROFLE_ROUTE = `${AUTH_ROUTES}/update-profile`; // API route to update profile details
