@@ -14,34 +14,34 @@ export const AUTH_ROUTES = "api/auth";
 // export const LOGIN_ROUTE = `${AUTH_ROUTES}/login`; // API route for user login
 export const LOGIN_ROUTE = `${HOST}/${AUTH_ROUTES}/login`;
 export const SIGNUP_ROUTE = `${HOST}/${AUTH_ROUTES}/signup`; // API route for user signup
-export const GET_USERINFO_ROUTE = `${AUTH_ROUTES}/userinfo`; // API route to fetch user info
-export const LOGOUT_ROUTE = `${AUTH_ROUTES}/logout`; // API route for logging out
-export const UPDATE_PROFLE_ROUTE = `${AUTH_ROUTES}/update-profile`; // API route to update profile details
-export const ADD_PROFILE_IMAGE_ROUTE = `${AUTH_ROUTES}/add-profile-image`; // AUTH_ROUTES is a constant string that holds the base URL for authentication-related API endpoints.,,,,API route to upload a profile image
-export const REMOVE_PROFILE_IMAGE_ROUTE = `${AUTH_ROUTES}/remove-profile-image`; // API route to remove profile image
+export const GET_USERINFO_ROUTE = `${HOST}/${AUTH_ROUTES}/userinfo`; // API route to fetch user info
+export const LOGOUT_ROUTE = `${HOST}/${AUTH_ROUTES}/logout`; // API route for logging out
+export const UPDATE_PROFLE_ROUTE = `${HOST}/${AUTH_ROUTES}/update-profile`; // API route to update profile details
+export const ADD_PROFILE_IMAGE_ROUTE = `${HOST}/${AUTH_ROUTES}/add-profile-image`; // AUTH_ROUTES is a constant string that holds the base URL for authentication-related API endpoints.,,,,API route to upload a profile image
+export const REMOVE_PROFILE_IMAGE_ROUTE = `${HOST}/${AUTH_ROUTES}/remove-profile-image`; // API route to remove profile image
 
 // Base route for messages-related API endpoints
 export const MESSAGES_ROUTES = "/api/messages";
 
 // Define specific message-related routes
-export const FETCH_ALL_MESSAGES_ROUTE = `${MESSAGES_ROUTES}/get-messages`; // API route to fetch all messages
-export const UPLOAD_FILE = `${MESSAGES_ROUTES}/upload-file`; // API route to upload files within messages
+export const FETCH_ALL_MESSAGES_ROUTE = `${HOST}/${MESSAGES_ROUTES}/get-messages`; // API route to fetch all messages
+export const UPLOAD_FILE = `${HOST}/${MESSAGES_ROUTES}/upload-file`; // API route to upload files within messages
 
 // Base route for channel-related API endpoints
 export const CHANNEL_ROUTES = "/api/channel";
 
 // Define specific channel-related routes
-export const CREATE_CHANNEL = `${CHANNEL_ROUTES}/create-channel`; // API route to create a new chat channel
-export const GET_USER_CHANNELS = `${CHANNEL_ROUTES}/get-user-channels`; // API route to fetch all channels a user is part of
-export const GET_CHANNEL_MESSAGES = `${CHANNEL_ROUTES}/get-channel-messages`; // API route to fetch messages in a specific channel
+export const CREATE_CHANNEL = `${HOST}/${CHANNEL_ROUTES}/create-channel`; // API route to create a new chat channel
+export const GET_USER_CHANNELS = `${HOST}/${CHANNEL_ROUTES}/get-user-channels`; // API route to fetch all channels a user is part of
+export const GET_CHANNEL_MESSAGES = `${HOST}/${CHANNEL_ROUTES}/get-channel-messages`; // API route to fetch messages in a specific channel
 
 // Base route for contacts-related API endpoints
 export const CONTACTS_ROTUES = "/api/contacts";
 
 // Define specific contacts-related routes
-export const SEARCH_CONTACTS_ROUTES = `${CONTACTS_ROTUES}/search`; // API route to search for contacts
-export const GET_CONTACTS_WITH_MESSAGES_ROUTE = `${CONTACTS_ROTUES}/get-contacts-for-list`; // API route to fetch contacts that have messages
-export const GET_ALL_CONTACTS = `${CONTACTS_ROTUES}/all-contacts`; // API route to fetch all contacts
+export const SEARCH_CONTACTS_ROUTES = `${HOST}/${CONTACTS_ROTUES}/search`; // API route to search for contacts
+export const GET_CONTACTS_WITH_MESSAGES_ROUTE = `${HOST}/${CONTACTS_ROTUES}/get-contacts-for-list`; // API route to fetch contacts that have messages
+export const GET_ALL_CONTACTS = `${HOST}/${CONTACTS_ROTUES}/all-contacts`; // API route to fetch all contacts
 
 // Define message types for categorizing different types of messages
 export const MESSAGE_TYPES = {
