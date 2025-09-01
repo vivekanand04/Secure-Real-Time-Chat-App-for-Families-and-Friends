@@ -118,6 +118,7 @@ app.use("/api/messages", messagesRoutes);
 app.use("/api/channel", channelRoutes);
 
 // ✅ Start Server
+
 const server = app.listen(port, () => {
   console.log(`🚀 Server running on port ${port}`);
 });

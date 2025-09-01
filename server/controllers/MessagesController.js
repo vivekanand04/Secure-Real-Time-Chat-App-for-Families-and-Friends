@@ -1,3 +1,4 @@
+import { log } from "console";
 import Message from "../model/MessagesModel.js";
 import { mkdirSync, renameSync } from "fs";
 
@@ -47,5 +48,53 @@ export const uploadFile = async (request, response, next) => {
   } catch (error) {
     console.log({ error }); // Log error for debugging
     return response.status(500).send("Internal Server Error."); // Handle server errors
+  }
+};
+
+
+
+
+
+
+//Delete messages
+
+
+export const deleteMessage = async (req, res) => {
+  try {
+    const { messageId } = req.params;
+    // const messageId="68b2a4008ef707791988a4b6";
+    const userId = req.userId; // still coming from middleware
+
+    console.log("messageId:", messageId);
+    console.log("JWT userId:", userId);
+
+    const message = await Message.findById(messageId);
+    
+
+    if (!message) {
+      return res.status(404).json({ error: "Message not found" });
+    }
+
+    console.log("Message sender:", message.sender.toString());
+    console.log("Message sender type:", typeof message.sender.toString());
+    console.log("UserId type:", typeof userId);
+
+    // Compare safely (sender is ObjectId, userId is string)
+    if (message.sender.toString() !== userId.toString()) {
+      return res
+        .status(403)
+        .json({ error: "You can only delete your own messages" });
+    }
+
+    // ✅ Soft delete
+    message.deleted = true;
+    message.deletedAt = new Date();
+
+    await message.save();
+
+    return res.status(200).json({ message: "Message deleted successfully" });
+  } catch (error) {
+    console.error("Error deleting message:", error);
+    res.status(500).json({ error: "Internal server error" });
   }
 };
